@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects - Akash Ghosh</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+}
+
+/* Stars Background */
+.stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    position: fixed;
+    left: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    z-index: 100;
+}
+
+.nav-item {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(14px);
+    transition: 0.35s ease;
+}
+
+.nav-icon {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: #cfd2ff;
+    stroke-width: 1.7;
+    transition: 0.3s ease;
+}
+
+.nav-item:hover {
+    transform: scale(1.2);
+    background: rgba(176,176,255,0.2);
+}
+
+.nav-item:hover .nav-icon {
+    stroke: white;
+}
+
+.nav-item.active {
+    transform: scale(1.25);
+    background: rgba(167,139,250,0.3);
+    box-shadow: 0 0 25px rgba(167,139,250,0.7);
+}
+
+.nav-item::after {
+    content: attr(data-label);
+    position: absolute;
+    left: 80px;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    color: #a78bfa;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+.nav-item:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 120px;
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 60px 30px;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeInUp 0.8s ease;
+}
+
+.profile-icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #fff, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #a78bfa;
+}
+
+/* GitHub Projects Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.project-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(176,176,255,0.15);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(167,139,250,0.5);
+    box-shadow: 0 10px 25px rgba(167,139,250,0.2);
+}
+
+.project-title {
+    font-size: 1.25rem;
+    color: #a78bfa;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project-title a {
+    color: #a78bfa;
+    text-decoration: none;
+}
+
+.project-title a:hover {
+    color: #fff;
+}
+
+.project-desc {
+    color: #d0d0d0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 12px;
+}
+
+.project-lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.lang-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #a78bfa;
+}
+
+.loading-text {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: #a78bfa;
+    font-size: 1.1rem;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    body { flex-direction: column; }
+    .sidebar {
+        position: relative;
+        transform: none;
+        left: 0;
+        top: 0;
+        flex-direction: row;
+        justify-content: center;
+        padding: 20px;
+    }
+    .main-content { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="nav-item" data-label="Home">
+        <a href="index.html">
+            <svg viewBox="0 0 24 24" class="nav-icon"><path d="M3 11L12 3L21 11V21H15V15H9V21H3Z"/></svg>
+        </a>
+    </div>
+    <div class="nav-item" data-label="About">
+        <a href="about.html">
+            <svg viewBox="0 0 24 24" class="nav-icon"><circle cx="12" cy="8" r="4"/><path d="M4 21C4 16.5 8 14 12 14C16 14 20 16.5 20 21"/></svg>
+        </a>
+    </div>
+    <div class="nav-item active" data-label="Projects">
+        <a href="projects.html">
+            <svg viewBox="0 0 24 24" class="nav-icon"><rect x="3" y="4" width="7" height="7"/><rect x="14" y="4" width="7" height="7"/><rect x="14" y="15" width="7" height="7"/><rect x="3" y="15" width="7" height="7"/></svg>
+        </a>
+    </div>
+    <div class="nav-item" data-label="Work">
+        <a href="work.html">
+            <svg viewBox="0 0 24 24" class="nav-icon"><rect x="2" y="7" width="20" height="14"/><path d="M16 7V5C16 3.9 15.1 3 14 3H10C8.9 3 8 3.9 8 5V7"/></svg>
+        </a>
+    </div>
+    <div class="nav-item" data-label="Contact">
+        <a href="contact.html">
+            <svg viewBox="0 0 24 24" class="nav-icon"><path d="M3 5H21V19H3Z"/><path d="M3 5L12 13L21 5"/></svg>
+        </a>
+    </div>
+</aside>
+
+<!-- Content -->
+<div class="main-content">
+    <div class="container">
+        <section class="page-header">
+            <div class="profile-icon">🎯</div>
+            <h1>Projects & GitHub Repos</h1>
+            <p class="subtitle">Live public repositories from @applecheeseburger</p>
+        </section>
+
+        <div id="github-projects" class="projects-grid">
+            <div class="loading-text">Loading GitHub Repositories...</div>
+        </div>
+    </div>
+</div>
+
+<script>
+/* Generate Stars */
+const starsContainer = document.getElementById('stars');
+for (let i = 0; i < 100; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    starsContainer.appendChild(star);
+}
+
+/* Fetch GitHub Repos */
+async function loadGitHubRepos() {
+    const container = document.getElementById('github-projects');
+    try {
+        const response = await fetch('https://api.github.com/users/applecheeseburger/repos?sort=updated&per_page=12');
+        if (!response.ok) throw new Error('Failed to load repositories');
+        const repos = await response.json();
+
+        if (repos.length === 0) {
+            container.innerHTML = `<div class="loading-text">No public repositories found.</div>`;
+            return;
+        }
+
+        container.innerHTML = repos.map(repo => `
+            <div class="project-card">
+                <div>
+                    <div class="project-title">
+                        <span>${repo.name}</span>
+                        <a href="${repo.html_url}" target="_blank" rel="noopener" title="View on GitHub">
+                            ↗
+                        </a>
+                    </div>
+                    <p class="project-desc">${repo.description || 'Enterprise data quality, validation, or automation project.'}</p>
+                </div>
+                <div class="project-meta">
+                    <span class="project-lang">
+                        <span class="lang-dot"></span>
+                        ${repo.language || 'Code'}
+                    </span>
+                    <span>⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count}</span>
+                </div>
+            </div>
+        `).join('');
+
+    } catch (err) {
+        console.error(err);
+        container.innerHTML = `
+            <div class="project-card">
+                <div class="project-title">
+                    <span>Data Quality Validation Framework</span>
+                    <a href="https://github.com/applecheeseburger" target="_blank">↗</a>
+                </div>
+                <p class="project-desc">Automated SQL & Python validation framework for auditing data anomaly detection in enterprise data pipelines.</p>
+                <div class="project-meta">
+                    <span class="project-lang"><span class="lang-dot"></span>Python / SQL</span>
+                    <span>⭐ GitHub Linked</span>
+                </div>
+            </div>
+        `;
+    }
+}
+
+loadGitHubRepos();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akash Ghosh - Portfolio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Stars Background */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.header {
+    text-align: center;
+    padding: 50px 0 30px;
+}
+
+.name {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #fff, #a78bfa, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: scaleUp 0.8s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+
+.title {
+    font-size: 1.3rem;
+    color: #a78bfa;
+    font-weight: 300;
+    letter-spacing: 0.15rem;
+    margin-bottom: 15px;
+    animation: fadeInUp 0.8s ease;
+}
+
+.download-resume {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.download-resume:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(167,139,250,0.4);
+}
+
+.github-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(167,139,250,0.4);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.github-link-btn:hover {
+    background: rgba(167,139,250,0.25);
+    transform: translateY(-3px);
+}
+
+/* Icons Carousel */
+.icons-carousel {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 30px 0;
+    overflow-x: auto;
+}
+
+.icon-item {
+    width: 65px;
+    height: 65px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.icon-item:hover {
+    transform: translateY(-8px) scale(1.05);
+    background: rgba(167,139,250,0.25);
+}
+
+/* Cards Grid */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(176,176,255,0.15);
+    border-radius: 20px;
+    padding: 22px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(167,139,250,0.25);
+    border-color: rgba(167,139,250,0.5);
+}
+
+.card h2 {
+    font-size: 1.4rem;
+    color: #a78bfa;
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #d0d0d0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Quick Links Footer */
+.footer {
+    text-align: center;
+    padding: 20px 0;
+    color: #888;
+    font-size: 0.85rem;
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="container">
+    <div class="header">
+        <h1 class="name">Akash Ghosh</h1>
+        <p class="title" id="rotating-title">Data Quality Engineer</p>
+
+        <div>
+            <a href="AKASH-GHOSH.docx" download class="download-resume">
+                📎 Download Resume
+            </a>
+            <a href="https://github.com/applecheeseburger" target="_blank" rel="noopener" class="github-link-btn">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub Profile
+            </a>
+        </div>
+    </div>
+
+    <div class="icons-carousel">
+        <div class="icon-item" title="Python">🐍</div>
+        <div class="icon-item" title="Data Analytics">📊</div>
+        <div class="icon-item" title="SQL & Databases">🗄️</div>
+        <div class="icon-item" title="Data Validation & QA">✅</div>
+        <div class="icon-item" title="Cloud Computing">☁️</div>
+        <div class="icon-item" title="Automation & Workflows">⚙️</div>
+    </div>
+
+    <div class="cards-grid">
+        <div class="card" onclick="window.location.href='about.html'">
+            <h2>About</h2>
+            <p>8 years in data quality engineering and governance.</p>
+        </div>
+
+        <div class="card" onclick="window.location.href='work.html'">
+            <h2>Work Experience</h2>
+            <p>Data Quality Associate at S&P Global Ratings.</p>
+        </div>
+
+        <div class="card" onclick="window.location.href='projects.html'">
+            <h2>Projects</h2>
+            <p>Enterprise-grade DQ frameworks, SQL validation & automation.</p>
+        </div>
+
+        <div class="card" onclick="window.location.href='contact.html'">
+            <h2>Contact</h2>
+            <p>Hyderabad | akashghosh020@gmail.com</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© <span id="year"></span> Akash Ghosh. All rights reserved. | Connected to GitHub: @applecheeseburger</p>
+    </footer>
+</div>
+
+<script>
+/* Stars */
+const starsContainer = document.getElementById('stars');
+for (let i = 0; i < 100; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    starsContainer.appendChild(star);
+}
+
+/* Year */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* Rotating subtitle */
+const titles = [
+    "Data Quality Associate",
+    "Assistant Manager",
+    "Data Quality Engineer",
+    "Speaks English / Hindi / Bengali",
+    "Loves automation",
+    "Uses AI for smart workflows"
+];
+
+let index = 0;
+const titleElement = document.getElementById("rotating-title");
+
+setInterval(() => {
+    titleElement.style.animation = "none";
+    void titleElement.offsetWidth;
+    titleElement.style.animation = "fadeInUp 0.8s ease";
+
+    index = (index + 1) % titles.length;
+    titleElement.textContent = titles[index];
+}, 2000);
+</script>
+
+</body>
+</html>
